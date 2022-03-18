@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>UserEdit</title>
+</head>
+<body>
+    <h1>Edition of Users</h1>
+
+    <form th:action="@{/user}" method="post">
+        <div><label>Username: <input type="text" name="username" th:value="${user.username}"></label></div>
+
+        <div th:each="role : ${roles}">
+            <div>
+                <input type="checkbox" th:name="${role}" th:checked="${#lists.contains(user.roles, role)}">
+                <label th:text="${role}"></label>
+            </div>
+        </div>
+
+        <div><input type="hidden" name="userId" th:value="${user.id}"></div>
+        <div><input type="submit" value="Edit"></div>
+    </form>
+</body>
+</html>
