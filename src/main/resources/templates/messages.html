@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml"><head>
     <meta charset="UTF-8">
     <title>Messages</title>
+    <link rel="stylesheet" href="/static/style.css"
 </head>
 <body>
     <div>
@@ -14,9 +15,10 @@
         <div th:if="${param.error}">
             Already registered.
         </div>
-        <form th:action="@{/messages}" method="post">
+        <form th:action="@{/messages}" method="post" enctype="multipart/form-data">
             <div><label>Text: <input type="text" th:name="text"></label></div>
             <div><label>Tag: <input type="text" th:name="tag"></label></div>
+            <div><label>Image: <input type="file" th:name="file"></label></div>
             <div><input type="submit" value="Add"></div>
         </form>
     </div>
@@ -35,6 +37,9 @@
         <b th:text="${message.text}"></b>
         <i th:text="${message.tag}"></i>
         <strong th:text="${message.getAuthorName}"></strong>
+        <div>
+            <img th:src="@{'/img/' + ${message.filename}}">
+        </div>
     </div>
 </body>
 </html>
