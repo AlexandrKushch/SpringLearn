@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("users")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     @Autowired
@@ -39,10 +39,10 @@ public class UserController {
     public String editUser(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
-            @RequestParam Long userId
+            @RequestParam Long userId,
+            Model model
     ) {
         User user = userRepo.findById(userId);
-
 
         Set<Role> roles = Arrays.stream(Role.values())
                 .filter(r -> form.containsKey(r.name()))

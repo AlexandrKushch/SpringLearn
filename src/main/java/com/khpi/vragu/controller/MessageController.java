@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -57,7 +56,7 @@ public class MessageController {
     {
         Message message = new Message(text, tag, author);
 
-        if (file != null) {
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
             File dir = new File(uploadPath);
 
             if (!dir.exists()) {
