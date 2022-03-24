@@ -29,6 +29,11 @@
                             </li>
                         </div>
                     </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/users/profile}">User Profile</a>
+                        </li>
+                    </div>
                 </ul>
 
                 <div class="navbar-text" sec:authorize="isAuthenticated()">

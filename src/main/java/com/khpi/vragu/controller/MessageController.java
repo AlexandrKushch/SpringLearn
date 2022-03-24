@@ -31,7 +31,6 @@ public class MessageController {
 
     @GetMapping(value = "/")
     public String showGreeting(Model model) {
-        emailSender.send("jedece8964@f1xm.com", "Test Subject", "Test message");
         return "home";
     }
 
