@@ -20,6 +20,10 @@
             Yoy have been logged out.
         </div>
 
+        <div th:if="${message}">
+            <span th:text="${message}"></span>
+        </div>
+
         <form th:action="@{/login}" method="post">
             <div class="mb-3">
                 <label class="form-label">Username:</label>
@@ -32,7 +36,6 @@
             <button type="submit" class="btn btn-primary">LogIn</button>
             <a th:href="@{/registration}">Registration</a>
         </form>
-
     </div>
 </body>
 </html>

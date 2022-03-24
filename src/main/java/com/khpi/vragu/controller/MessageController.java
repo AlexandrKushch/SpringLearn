@@ -3,6 +3,7 @@ package com.khpi.vragu.controller;
 import com.khpi.vragu.domain.Message;
 import com.khpi.vragu.domain.User;
 import com.khpi.vragu.repos.MessageRepo;
+import com.khpi.vragu.service.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,11 +23,15 @@ public class MessageController {
     @Autowired
     private MessageRepo messageRepo;
 
+    @Autowired
+    private EmailSender emailSender;
+
     @Value("${upload.path}")
     private String uploadPath;
 
     @GetMapping(value = "/")
     public String showGreeting(Model model) {
+        emailSender.send("jedece8964@f1xm.com", "Test Subject", "Test message");
         return "home";
     }
 
