@@ -20,15 +20,41 @@
         <form th:action="@{/registration}" method="post">
             <div class="mb-3">
                 <label class="form-label">Email:</label>
-                <input type="email" class="form-control" name="email" placeholder="some@some.com">
+                <input type="email" th:value="${user} ? ${user.getEmail()} : ''" class="form-control"
+                       th:classappend="${errorMap} and ${errorMap.get('emailError')} ? 'is-invalid' : ''"
+                       name="email" placeholder="some@some.com">
+                <div th:if="${errorMap} and ${errorMap.get('emailError')}" class="invalid-feedback">
+                    <span th:text="${errorMap.get('emailError')}"></span>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Username:</label>
-                <input type="text" class="form-control" name="username" placeholder="Username">
+                <input type="text" th:value="${user} ? ${user.getUsername()} : ''" class="form-control"
+                       th:classappend="${errorMap} and ${errorMap.get('usernameError')} ? 'is-invalid' : ''"
+                       name="username" placeholder="Username">
+                <div th:if="${errorMap} and ${errorMap.get('usernameError')}" class="invalid-feedback">
+                    <span th:text="${errorMap.get('usernameError')}"></span>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Password:</label>
-                <input type="password" class="form-control" name="password" placeholder="Password">
+                <input type="password" class="form-control"
+                       th:classappend="${errorMap} and ${errorMap.get('passwordError')} ? 'is-invalid' : ''"
+                       name="password"
+                       placeholder="Password">
+                <div th:if="${errorMap} and ${errorMap.get('passwordError')}" class="invalid-feedback">
+                    <span th:text="${errorMap.get('passwordError')}"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Retype Password:</label>
+                <input type="password" class="form-control"
+                       th:classappend="${passwordError} ? 'is-invalid' : ''"
+                       name="password2"
+                       placeholder="Retype Password">
+                <div th:if="${passwordError}" class="invalid-feedback">
+                    <span th:text="${passwordError}"></span>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>

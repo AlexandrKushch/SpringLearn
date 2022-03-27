@@ -1,5 +1,6 @@
 package com.khpi.vragu.service;
 
+import com.khpi.vragu.config.PasswordConfig;
 import com.khpi.vragu.domain.Role;
 import com.khpi.vragu.domain.User;
 import com.khpi.vragu.repos.UserRepo;
@@ -20,6 +21,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private EmailSender emailSender;
 
+    @Autowired
+    private PasswordConfig passwordConfig;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo.findByUsername(username);
@@ -35,6 +39,7 @@ public class UserService implements UserDetailsService {
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
+        user.setPassword(passwordConfig.getPasswordEncoder().encode(user.getPassword()));
 
         userRepo.save(user);
 
