@@ -13,7 +13,7 @@
     <div class="container mt-5">
         <h1>Edition of Users</h1>
 
-        <form th:action="@{/user}" method="post">
+        <form th:action="@{/users}" method="post">
             <div><label>Username: <input type="text" name="username" th:value="${user.username}"></label></div>
 
             <div th:each="role : ${roles}">

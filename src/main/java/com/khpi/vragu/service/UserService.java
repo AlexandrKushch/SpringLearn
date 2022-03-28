@@ -106,7 +106,7 @@ public class UserService implements UserDetailsService {
         }
 
         if (password != null && !password.isEmpty()) {
-            user.setPassword(password);
+            user.setPassword(passwordConfig.getPasswordEncoder().encode(password));
         }
 
         user.setActivationCode(UUID.randomUUID().toString());

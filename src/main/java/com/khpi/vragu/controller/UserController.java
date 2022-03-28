@@ -44,7 +44,7 @@ public class UserController {
     ) {
         userService.editUser(username, form, userId);
 
-        return "redirect:/user";
+        return "redirect:/users";
     }
 
     @GetMapping("profile")

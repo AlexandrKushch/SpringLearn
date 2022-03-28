@@ -20,7 +20,8 @@
             Yoy have been logged out.
         </div>
 
-        <div th:if="${message}">
+        <div th:if="${message}" class="alert" th:classappend="alert-+${messageType}">
+
             <span th:text="${message}"></span>
         </div>
 

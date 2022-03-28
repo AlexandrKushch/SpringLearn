@@ -49,11 +49,11 @@
             <div class="mb-3">
                 <label class="form-label">Retype Password:</label>
                 <input type="password" class="form-control"
-                       th:classappend="${passwordError} ? 'is-invalid' : ''"
+                       th:classappend="${password2Error} ? 'is-invalid' : ''"
                        name="password2"
                        placeholder="Retype Password">
-                <div th:if="${passwordError}" class="invalid-feedback">
-                    <span th:text="${passwordError}"></span>
+                <div th:if="${password2Error}" class="invalid-feedback">
+                    <span th:text="${password2Error}"></span>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
