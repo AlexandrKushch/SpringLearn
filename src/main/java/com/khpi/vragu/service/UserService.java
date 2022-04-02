@@ -5,6 +5,7 @@ import com.khpi.vragu.domain.Role;
 import com.khpi.vragu.domain.User;
 import com.khpi.vragu.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +24,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private PasswordConfig passwordConfig;
+
+    @Value("${hostname}")
+    private String hostname;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -51,8 +55,9 @@ public class UserService implements UserDetailsService {
     private void sendMessage(User user) {
         if (!user.getEmail().isEmpty()) {
             String message = String.format("Hello %s! \n" +
-                            "Welcome to VRagu. Please visit link: http://localhost:8080/activate/%s",
+                            "Welcome to VRagu. Please visit link: http://%s/activate/%s",
                     user.getUsername(),
+                    hostname,
                     user.getActivationCode()
             );
             emailSender.send(user.getEmail(), "Activation code", message);
